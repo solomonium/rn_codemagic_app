@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 6,
             "patches": [
                 {
                     "date": 1745046574367,
@@ -12,6 +12,26 @@
                 {
                     "date": 1745047692377,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,4 +8,6 @@\n       android_signing:\n         - cm_keystore_credentials\n       groups:\n         - google_credentials\n+      vars:\n+        PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n"
+                },
+                {
+                    "date": 1745048726072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,4 +10,11 @@\n       groups:\n         - google_credentials\n       vars:\n         PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n+    scripts:\n+      - name: Install npm dependencies\n+        script: |\n+          npm install\n+      - name: Set Android SDK location\n+        script: |\n+          echo \"sdk.dir=$ANDROID_SDK_ROOT\" > \"$CM_BUILD_DIR/android/local.properties\"\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1745048835309,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,4 +17,10 @@\n           npm install\n       - name: Set Android SDK location\n         script: |\n           echo \"sdk.dir=$ANDROID_SDK_ROOT\" > \"$CM_BUILD_DIR/android/local.properties\"\n+      - name: Build Android release\n+        script: |\n+          cd android\n+          ./gradlew bundleRelease\n+    artifacts:\n+      - android/app/build/outputs/**/*.aab\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1745048927114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,8 +19,14 @@\n         script: |\n           echo \"sdk.dir=$ANDROID_SDK_ROOT\" > \"$CM_BUILD_DIR/android/local.properties\"\n       - name: Build Android release\n         script: |\n+          LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name \"$PACKAGE_NAME\")\n+          if [ -z $LATEST_GOOGLE_PLAY_BUILD_NUMBER ]; then\n+          UPDATED_BUILD_NUMBER=$BUILD_NUMBER\n+          else\n+              UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))\n+          fi\n           cd android\n           ./gradlew bundleRelease\n     artifacts:\n       - android/app/build/outputs/**/*.aab\n"
+                },
+                {
+                    "date": 1745048973428,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,6 +27,8 @@\n               UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))\n           fi\n           cd android\n           ./gradlew bundleRelease\n+              -PversionCode=$UPDATED_BUILD_NUMBER \\\n+              -PversionName=1.0.$UPDATED_BUILD_NUMBER\n     artifacts:\n       - android/app/build/outputs/**/*.aab\n"
+                },
+                {
+                    "date": 1745049020612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,4 +31,12 @@\n               -PversionCode=$UPDATED_BUILD_NUMBER \\\n               -PversionName=1.0.$UPDATED_BUILD_NUMBER\n     artifacts:\n       - android/app/build/outputs/**/*.aab\n+    publishing:\n+      email:\n+        recipients:\n+          - solomon@codemagic.io\n+      google_play:\n+        track: internal\n+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS\n+        submit_as_draft: true\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1745046574367,
