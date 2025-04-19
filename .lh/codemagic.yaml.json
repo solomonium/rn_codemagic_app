@@ -1,0 +1,22 @@
+{
+    "sourceFile": "codemagic.yaml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745046574367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745047692377,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,4 +8,6 @@\n       android_signing:\n         - cm_keystore_credentials\n       groups:\n         - google_credentials\n+      vars:\n+        PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n"
+                }
+            ],
+            "date": 1745046574367,
+            "name": "Commit-0",
+            "content": "workflows:\n  android-workflow:\n    name: Android Sample Workflow\n    instance_type: mac_mini_m2\n    max_build_duration: 120\n    environment:\n      flutter: stable\n      android_signing:\n        - cm_keystore_credentials\n      groups:\n        - google_credentials\n   "
+        }
+    ]
+}

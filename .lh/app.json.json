@@ -1,0 +1,18 @@
+{
+    "sourceFile": "app.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1745047613109,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1745047613109,
+            "name": "Commit-0",
+            "content": "{\n  \"expo\": {\n    \"name\": \"cm_solo_rn\",\n    \"slug\": \"cm_solo_rn\",\n    \"version\": \"1.0.0\",\n    \"orientation\": \"landscape\",\n    \"icon\": \"./assets/icon.png\",\n    \"userInterfaceStyle\": \"light\",\n    \"newArchEnabled\": true,\n    \"splash\": {\n      \"image\": \"./assets/splash-icon.png\",\n      \"resizeMode\": \"contain\",\n      \"backgroundColor\": \"#ffffff\"\n    },\n    \"ios\": {\n      \"supportsTablet\": true\n    },\n    \"android\": {\n      \"adaptiveIcon\": {\n        \"foregroundImage\": \"./assets/adaptive-icon.png\",\n        \"backgroundColor\": \"#ffffff\"\n      }\n    },\n    \"web\": {\n      \"favicon\": \"./assets/favicon.png\"\n    }\n  }\n}\n"
+        }
+    ]
+}

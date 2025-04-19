@@ -1,0 +1,22 @@
+{
+    "sourceFile": "App.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1745047220253,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1745047343741,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,9 +4,9 @@\n export default function App() {\n   const [message, setMessage] = useState('Welcome to My First React Native App!');\n \n   const changeMessage = () => {\n-    setMessage('You clicked the button!');\n+    setMessage('You clicked the button yes!');\n   };\n \n   return (\n     <View style={styles.container}>\n"
+                }
+            ],
+            "date": 1745047220253,
+            "name": "Commit-0",
+            "content": "import React, { useState } from 'react';\nimport { View, Text, Button, StyleSheet } from 'react-native';\n\nexport default function App() {\n  const [message, setMessage] = useState('Welcome to My First React Native App!');\n\n  const changeMessage = () => {\n    setMessage('You clicked the button!');\n  };\n\n  return (\n    <View style={styles.container}>\n      <Text style={styles.message}>{message}</Text>\n      <Button title=\"Click Me\" onPress={changeMessage} />\n    </View>\n  );\n}\n\nconst styles = StyleSheet.create({\n  container: {\n    flex: 1,\n    justifyContent: 'center',\n    alignItems: 'center',\n    backgroundColor: '#f5f5f5',\n  },\n  message: {\n    fontSize: 20,\n    marginBottom: 20,\n  },\n});"
+        }
+    ]
+}
