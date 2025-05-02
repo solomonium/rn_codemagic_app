@@ -9,8 +9,8 @@ workflows:
         - cm_keystore_credentials
       # groups:
       #   - google_credentials
-      vars:
-        PACKAGE_NAME: "io.codemagic.sample.reactnative"
+      # vars:
+      #   PACKAGE_NAME: "io.codemagic.sample.reactnative"
       node: latest
     scripts:
       - name: Install npm dependencies
