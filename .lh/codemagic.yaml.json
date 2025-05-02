@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 9,
+            "activePatchIndex": 10,
             "patches": [
                 {
                     "date": 1745046574367,
@@ -44,6 +44,10 @@
                 {
                     "date": 1746200030397,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,9 @@\n         - cm_keystore_credentials\n       groups:\n         - google_credentials\n       vars:\n-        PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n+          PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n     scripts:\n       - name: Install npm dependencies\n         script: |\n           npm install\n"
+                },
+                {
+                    "date": 1746200328862,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,9 @@\n       groups:\n         - google_credentials\n       vars:\n         PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n+      node: latest\n     scripts:\n       - name: Install npm dependencies\n         script: |\n           npm install\n"
                 }
             ],
             "date": 1745046574367,

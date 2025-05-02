@@ -11,6 +11,7 @@ workflows:
         - google_credentials
       vars:
         PACKAGE_NAME: "io.codemagic.sample.reactnative"
+      node: latest
     scripts:
       - name: Install npm dependencies
         script: |
