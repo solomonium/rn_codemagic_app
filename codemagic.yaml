@@ -7,8 +7,8 @@ workflows:
       flutter: stable
       android_signing:
         - cm_keystore_credentials
-      groups:
-        - google_credentials
+      # groups:
+      #   - google_credentials
       vars:
         PACKAGE_NAME: "io.codemagic.sample.reactnative"
       node: latest
