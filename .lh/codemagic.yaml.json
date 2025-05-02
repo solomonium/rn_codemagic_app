@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 6,
+            "activePatchIndex": 7,
             "patches": [
                 {
                     "date": 1745046574367,
@@ -32,6 +32,10 @@
                 {
                     "date": 1745049020612,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,4 +31,12 @@\n               -PversionCode=$UPDATED_BUILD_NUMBER \\\n               -PversionName=1.0.$UPDATED_BUILD_NUMBER\n     artifacts:\n       - android/app/build/outputs/**/*.aab\n+    publishing:\n+      email:\n+        recipients:\n+          - solomon@codemagic.io\n+      google_play:\n+        track: internal\n+        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS\n+        submit_as_draft: true\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1746199693390,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n       android_signing:\n         - cm_keystore_credentials\n       groups:\n         - google_credentials\n-      vars:\n-        PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n+      # vars:\n+      #   PACKAGE_NAME: \"io.codemagic.sample.reactnative\"\n     scripts:\n       - name: Install npm dependencies\n         script: |\n           npm install\n"
                 }
             ],
             "date": 1745046574367,
