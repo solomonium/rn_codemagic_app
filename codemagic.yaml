@@ -4,13 +4,12 @@ workflows:
     instance_type: mac_mini_m2
     max_build_duration: 120
     environment:
-      # flutter: stable
-      # android_signing:
-      #   - cm_keystore_credentials
+      android_signing:
+        - solocmrn
       # groups:
       #   - google_credentials
-      # vars:
-      #   PACKAGE_NAME: "io.codemagic.sample.reactnative"
+      vars:
+        PACKAGE_NAME: "io.codemagic.sample.reactnative"
       node: latest
     scripts:
       - name: Install npm dependencies
