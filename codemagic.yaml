@@ -38,5 +38,5 @@ workflows:
           - solomon@codemagic.io
       google_play:
         track: internal
-        credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
+        # credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
         submit_as_draft: true
