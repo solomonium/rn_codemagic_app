@@ -23,7 +23,7 @@ workflows:
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
       - name: Create Local Variables
         script: |
-          echo "FB_CLIENT_ID=$FB_CLIENT_ID" > .env
+          echo "FB_CLIENT_ID=$FB_CLIENT_ID" >> .env
       - name: Clean Android build
         script: |
           cd android
