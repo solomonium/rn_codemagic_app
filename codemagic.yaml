@@ -13,12 +13,11 @@ workflows:
         # - google_credentials
       vars:
         PACKAGE_NAME: "io.codemagic.sample.reactnative"
-      node: latest
+      # node: latest
     scripts:
       - name: Install npm dependencies
         script: |
-          cd $CM_BUILD_DIR
-          yarn install --ignore-scripts
+          npm install
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
