@@ -37,10 +37,10 @@ workflows:
               UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
           fi
           cd android
-          ./gradlew assembleStagingRelease \
+          ENVFILE=.env ./gradlew bundleRelease
               -PversionCode=$UPDATED_BUILD_NUMBER \
               -PversionName=1.0.$UPDATED_BUILD_NUMBER
-          # ./gradlew bundleRelease
+          # ./gradlew assembleStagingRelease \
     artifacts:
       - android/app/build/outputs/**/*.aab
     publishing:
