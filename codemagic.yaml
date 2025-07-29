@@ -24,10 +24,10 @@ workflows:
       - name: Create Local Variables
         script: |
           echo "FB_CLIENT_ID=$FB_CLIENT_ID" >> .env
-      - name: Clean Android build
-        script: |
-          cd android
-          ./gradlew clean
+      # - name: Clean Android build
+      #   script: |
+      #     cd android
+      #     ./gradlew clean
       - name: Build Android release
         script: |
           LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME")
