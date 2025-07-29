@@ -21,6 +21,9 @@ workflows:
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+      - name: Create Local Variables
+        script: |
+          echo "FB_CLIENT_ID=$FB_CLIENT_ID" > .env
       - name: Clean Android build
         script: |
           cd android
@@ -34,9 +37,10 @@ workflows:
               UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
           fi
           cd android
-          ./gradlew bundleRelease
-              # -PversionCode=$UPDATED_BUILD_NUMBER \
-              # -PversionName=1.0.$UPDATED_BUILD_NUMBER
+          ENVFILE=.env ./gradlew assembleStagingRelease \
+              -PversionCode=$UPDATED_BUILD_NUMBER \
+              -PversionName=1.0.$UPDATED_BUILD_NUMBER
+          # ./gradlew bundleRelease
     artifacts:
       - android/app/build/outputs/**/*.aab
     publishing:
