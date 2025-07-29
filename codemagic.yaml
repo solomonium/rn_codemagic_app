@@ -43,6 +43,7 @@ workflows:
           # ./gradlew assembleStagingRelease \
     artifacts:
       - android/app/build/outputs/**/*.aab
+      - android/app/build/outputs/**/*.apk
     publishing:
       email:
         recipients:
