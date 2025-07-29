@@ -39,7 +39,7 @@ workflows:
           cd android
           ENVFILE=.env ./gradlew bundleRelease \
               -PversionCode=$UPDATED_BUILD_NUMBER \
-              # -PversionName=1.0.$UPDATED_BUILD_NUMBER
+              -PversionName=1.0.$UPDATED_BUILD_NUMBER
           # ./gradlew assembleStagingRelease \
     artifacts:
       - android/app/build/outputs/**/*.aab
