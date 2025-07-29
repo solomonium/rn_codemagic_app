@@ -9,7 +9,8 @@ workflows:
       android_signing:
         - solocmrn
       groups:
-        - google_credentials
+        - reactnative
+        # - google_credentials
       vars:
         PACKAGE_NAME: "io.codemagic.sample.reactnative"
       node: latest
