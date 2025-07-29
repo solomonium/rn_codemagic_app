@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 2,
+            "activePatchIndex": 3,
             "patches": [
                 {
                     "date": 1746199193575,
@@ -16,6 +16,10 @@
                 {
                     "date": 1746419259081,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -111,10 +111,10 @@\n                     keyAlias keystoreProperties['keyAlias']\n                     keyPassword keystoreProperties['keyPassword']\n                     storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null\n                     storePassword keystoreProperties['storePassword']\n-              }\n-          }\n+                }\n+            }\n     }\n     buildTypes {\n         debug {\n             signingConfig signingConfigs.debug\n"
+                },
+                {
+                    "date": 1753794873662,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -90,9 +90,9 @@\n     defaultConfig {\n         applicationId 'io.codemagic.sample.reactnative'\n         minSdkVersion rootProject.ext.minSdkVersion\n         targetSdkVersion rootProject.ext.targetSdkVersion\n-        versionCode 1\n+        versionCode -1\n         versionName \"1.0.0\"\n     }\n     signingConfigs {\n         debug {\n"
                 }
             ],
             "date": 1746199193575,
