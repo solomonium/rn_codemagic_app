@@ -5,7 +5,8 @@ workflows:
     max_build_duration: 120
     environment:
       ios_signing:
-        - solocmrn
+        distribution_type: app_store
+        bundle_identifier: io.codemagic.sample.reactnative
       groups:
         - reactnative
         - appstore_credentials
@@ -51,12 +52,12 @@ workflows:
       email:
         recipients:
           - solomon@codemagic.io
-        app_store_connect:
-          auth: integration
-          submit_to_testflight: true
-          beta_groups:
-            - App Store Connect Users
-          submit_to_app_store: false
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - App Store Connect Users
+        submit_to_app_store: false
 
   # android-workflow:
   #   name: React Native App Expo
