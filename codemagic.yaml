@@ -1,54 +1,119 @@
 workflows:
-  android-workflow:
+  ios-workflow:
     name: React Native App Expo
     instance_type: mac_mini_m2
     max_build_duration: 120
     environment:
-      # groups:
-      #   - app_center_credentials
-      android_signing:
+      ios_signing:
         - solocmrn
       groups:
         - reactnative
-        # - google_credentials
+        - appstore_credentials
       vars:
-        PACKAGE_NAME: "io.codemagic.sample.reactnative"
+        XCODE_WORKSPACE: "ios/App/App.xcworkspace"
+        XCODE_SCHEME: "App"
+        BUNDLE_ID: "io.codemagic.sample.reactnative"
       # node: latest
+    integrations:
+      app_store_connect: SolomonAPIKey
     scripts:
-      # - name: Install npm dependencies
-      #   script: |
-      #     yarn install
-      - name: Set Android SDK location
+      - name: Install dependencies
         script: |
-          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
-      - name: Create Local Variables
+          echo "Installing Node.js dependencies..."
+          npm ci
+      - name: Build React application
         script: |
-          echo "FB_CLIENT_ID=$FB_CLIENT_ID" >> .env
-      # - name: Clean Android build
-      #   script: |
-      #     cd android
-      #     ./gradlew clean
-      - name: Build Android release
+          echo "Building React app for production..."
+          npm run build
+      - name: Install CocoaPods dependencies
         script: |
-          LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME")
-          if [ -z $LATEST_GOOGLE_PLAY_BUILD_NUMBER ]; then
-          UPDATED_BUILD_NUMBER=$BUILD_NUMBER
-          else
-              UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
-          fi
-          cd android
-          ENVFILE=.env ./gradlew assembleRelease \
-              -PversionCode=$UPDATED_BUILD_NUMBER \
-              -PversionName=1.0.$UPDATED_BUILD_NUMBER
-          # ./gradlew assembleStagingRelease \
+          echo "Installing CocoaPods dependencies..."
+          cd ios/App
+          pod install
+      - name: Configure iOS signing
+        script: |
+          echo "Configuring iOS code signing..."
+          xcode-project use-profiles
+      - name: Sync Capacitor
+        script: |
+          echo "Syncing Capacitor with iOS..."
+          npx cap sync ios
+      - name: Build iOS application
+        script: |
+          echo "Building iOS app..."
+          xcode-project build-ipa \
+            --workspace "$XCODE_WORKSPACE" \
+            --scheme "$XCODE_SCHEME"
     artifacts:
-      - android/app/build/outputs/**/*.aab
-      - android/app/build/outputs/**/*.apk
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
     publishing:
       email:
         recipients:
           - solomon@codemagic.io
-      # google_play:
-      #   track: internal
-      #   credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
-      #   submit_as_draft: true
+        app_store_connect:
+          auth: integration
+          submit_to_testflight: true
+          beta_groups:
+            - App Store Connect Users
+          submit_to_app_store: false
+
+  # android-workflow:
+  #   name: React Native App Expo
+  #   instance_type: mac_mini_m2
+  #   max_build_duration: 120
+  #   environment:
+  #     # groups:
+  #     #   - app_center_credentials
+  #     android_signing:
+  #       - solocmrn
+  #     groups:
+  #       - reactnative
+  #       # - google_credentials
+  #     vars:
+  #       PACKAGE_NAME: "io.codemagic.sample.reactnative"
+  #     # node: latest
+  #   scripts:
+  #     # - name: Install npm dependencies
+  #     #   script: |
+  #     #     yarn install
+  #     - name: Set Android SDK location
+  #       script: |
+  #         echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/android/local.properties"
+  #     - name: Create Local Variables
+  #       script: |
+  #         echo "FB_CLIENT_ID=$FB_CLIENT_ID" >> .env
+  #     # - name: Clean Android build
+  #     #   script: |
+  #     #     cd android
+  #     #     ./gradlew clean
+  #     - name: Build Android release
+  #       script: |
+  #         LATEST_GOOGLE_PLAY_BUILD_NUMBER=$(google-play get-latest-build-number --package-name "$PACKAGE_NAME")
+  #         if [ -z $LATEST_GOOGLE_PLAY_BUILD_NUMBER ]; then
+  #         UPDATED_BUILD_NUMBER=$BUILD_NUMBER
+  #         else
+  #             UPDATED_BUILD_NUMBER=$(($LATEST_GOOGLE_PLAY_BUILD_NUMBER + 1))
+  #         fi
+  #         cd android
+  #         ENVFILE=.env ./gradlew assembleRelease \
+  #             -PversionCode=$UPDATED_BUILD_NUMBER \
+  #             -PversionName=1.0.$UPDATED_BUILD_NUMBER
+  #         # ./gradlew assembleStagingRelease \
+  #   artifacts:
+  #     - android/app/build/outputs/**/*.aab
+  #     - android/app/build/outputs/**/*.apk
+  #   publishing:
+  #     email:
+  #       recipients:
+  #         - solomon@codemagic.io
+  #       app_store_connect:
+  #         auth: integration
+  #         submit_to_testflight: true
+  #         beta_groups:
+  #           - App Store Connect Users
+  #         submit_to_app_store: false
+  #     # google_play:
+  #     #   track: internal
+  #     #   credentials: $GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS
+  #     #   submit_as_draft: true
