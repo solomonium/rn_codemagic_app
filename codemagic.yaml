@@ -53,7 +53,7 @@ workflows:
         recipients:
           - solomon@codemagic.io
       app_store_connect:
-        # auth: integration
+        auth: integration
         submit_to_testflight: true
         beta_groups:
           - App Store Connect Users
